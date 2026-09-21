@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- 밤하늘 -->
+    <linearGradient id="nightSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c1520"/>
+      <stop offset="35%" stop-color="#152535"/>
+      <stop offset="65%" stop-color="#1a3045"/>
+      <stop offset="100%" stop-color="#0f1a28"/>
+    </linearGradient>
+
+    <!-- 달빛 확산 -->
+    <radialGradient id="moonGlow" cx="72%" cy="22%" r="45%">
+      <stop offset="0%" stop-color="#f5f0e0" stop-opacity="0.95"/>
+      <stop offset="8%" stop-color="#e8e4d8" stop-opacity="0.55"/>
+      <stop offset="25%" stop-color="#c8d4e0" stop-opacity="0.25"/>
+      <stop offset="50%" stop-color="#8a9eb0" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#152535" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 산 실루엣 그라데이션 -->
+    <linearGradient id="mountainFar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d5068"/>
+      <stop offset="100%" stop-color="#2a3848"/>
+    </linearGradient>
+    <linearGradient id="mountainMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#253545"/>
+      <stop offset="100%" stop-color="#1a2838"/>
+    </linearGradient>
+    <linearGradient id="mountainNear" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#152030"/>
+      <stop offset="100%" stop-color="#0a121c"/>
+    </linearGradient>
+
+    <filter id="mist" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <filter id="softBlur" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="moonBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <!-- 밤하늘 -->
+  <rect width="1920" height="1080" fill="url(#nightSky)"/>
+
+  <!-- 달빛 -->
+  <rect width="1920" height="1080" fill="url(#moonGlow)"/>
+
+  <!-- 별 -->
+  <circle cx="180" cy="120" r="1.2" fill="#e8eef5" opacity="0.7"/>
+  <circle cx="320" cy="80" r="0.8" fill="#d0dae8" opacity="0.5"/>
+  <circle cx="450" cy="160" r="1" fill="#e8eef5" opacity="0.6"/>
+  <circle cx="580" cy="60" r="0.7" fill="#c8d4e0" opacity="0.4"/>
+  <circle cx="1200" cy="90" r="1.1" fill="#e8eef5" opacity="0.65"/>
+  <circle cx="1450" cy="140" r="0.9" fill="#d0dae8" opacity="0.5"/>
+  <circle cx="1600" cy="70" r="0.7" fill="#c8d4e0" opacity="0.45"/>
+  <circle cx="900" cy="50" r="0.8" fill="#e8eef5" opacity="0.55"/>
+  <circle cx="1050" cy="130" r="1" fill="#d8e4f0" opacity="0.5"/>
+
+  <!-- 보름달 -->
+  <circle cx="1380" cy="200" r="62" fill="#f8f4e8" filter="url(#moonBlur)"/>
+  <circle cx="1380" cy="200" r="55" fill="#faf6ea"/>
+  <circle cx="1365" cy="188" r="8" fill="#e8e4d8" opacity="0.3"/>
+
+  <!-- 원거리 산 (옅은 수묵) -->
+  <path
+    d="M0 520 C200 380 400 420 600 360 C800 300 950 400 1100 340 C1300 260 1500 380 1700 320 L1920 380 L1920 1080 L0 1080 Z"
+    fill="url(#mountainFar)"
+    opacity="0.55"
+    filter="url(#mist)"
+  />
+
+  <!-- 중경 산 -->
+  <path
+    d="M0 620 C180 500 350 560 520 480 C700 400 880 520 1050 460 C1200 410 1400 500 1600 440 C1750 400 1850 480 1920 520 L1920 1080 L0 1080 Z"
+    fill="url(#mountainMid)"
+    opacity="0.75"
+    filter="url(#softBlur)"
+  />
+
+  <!-- 솔나무 실루엣 (좌측) -->
+  <g fill="#0a121c" opacity="0.85">
+    <path d="M120 680 L130 580 L140 680 Z"/>
+    <path d="M110 700 L125 620 L135 700 Z"/>
+    <path d="M145 690 L155 600 L165 690 Z"/>
+    <path d="M100 720 L115 650 L125 720 Z"/>
+    <rect x="118" y="680" width="8" height="40" rx="1"/>
+    <rect x="108" y="700" width="6" height="35" rx="1"/>
+  </g>
+
+  <!-- 근경 산 (진한 먹) -->
+  <path
+    d="M0 780 C250 660 450 720 650 640 C850 560 1000 680 1200 620 C1400 560 1650 700 1920 660 L1920 1080 L0 1080 Z"
+    fill="url(#mountainNear)"
+    opacity="0.92"
+  />
+
+  <!-- 계곡 안개 -->
+  <ellipse cx="960" cy="680" rx="700" ry="120" fill="#c8d4e0" opacity="0.12" filter="url(#mist)"/>
+  <ellipse cx="600" cy="720" rx="400" ry="80" fill="#d8e4f0" opacity="0.08" filter="url(#mist)"/>
+
+  <!-- 강/호수 (달빛 반사) -->
+  <path
+    d="M0 860 Q480 820 960 840 T1920 830 L1920 920 Q960 900 480 920 T0 900 Z"
+    fill="#1a3045"
+    opacity="0.6"
+  />
+  <path
+    d="M1200 835 Q1380 825 1500 838 L1500 855 Q1380 842 1200 852 Z"
+    fill="#e8eef5"
+    opacity="0.35"
+    filter="url(#softBlur)"
+  />
+  <ellipse cx="1380" cy="845" rx="60" ry="8" fill="#f5f0e0" opacity="0.5" filter="url(#mist)"/>
+
+  <!-- 수묵 붓터치 (산허리) -->
+  <path
+    d="M400 580 Q520 540 640 580"
+    stroke="#4a6078"
+    stroke-width="1.5"
+    fill="none"
+    opacity="0.25"
+    filter="url(#softBlur)"
+  />
+  <path
+    d="M1100 520 Q1250 480 1380 530"
+    stroke="#4a6078"
+    stroke-width="1.2"
+    fill="none"
+    opacity="0.2"
+    filter="url(#softBlur)"
+  />
+
+  <!-- 전경 수묵 언덕 -->
+  <path
+    d="M0 920 Q300 880 600 910 T1200 895 T1920 915 L1920 1080 L0 1080 Z"
+    fill="#080e16"
+    opacity="0.85"
+  />
+</svg>
