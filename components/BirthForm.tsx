@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { BIRTH_CITIES } from "@/lib/constants";
-import { clampInt, daysInMonth, isValidBirthDate } from "@/lib/birthDate";
+import { daysInMonth, isValidBirthDate } from "@/lib/birthDate";
 import { saveSession } from "@/lib/session";
 import { useIsClient } from "@/lib/useClientSession";
 import type { BirthInput, SajuData } from "@/lib/saju/types";
@@ -83,42 +83,6 @@ function BirthFormFields() {
     }
   }, [birthYear, birthMonth, birthDay, maxDay, setValue]);
 
-  function bindClampedNumber(
-    name: keyof Pick<
-      FormValues,
-      "birthYear" | "birthMonth" | "birthDay" | "birthHour" | "birthMinute"
-    >,
-    min: number,
-    max: number,
-  ) {
-    const { onChange, onBlur, ...rest } = register(name, { valueAsNumber: true });
-
-    return {
-      ...rest,
-      type: "number" as const,
-      min,
-      max,
-      inputMode: "numeric" as const,
-      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const raw = e.target.value;
-        if (raw === "") {
-          onChange(e);
-          return;
-        }
-        const clamped = clampInt(Number(raw), min, max);
-        e.target.value = String(clamped);
-        setValue(name, clamped, { shouldValidate: true });
-      },
-      onBlur: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const raw = e.target.value;
-        const clamped = clampInt(raw === "" ? min : Number(raw), min, max);
-        e.target.value = String(clamped);
-        setValue(name, clamped, { shouldValidate: true });
-        onBlur(e);
-      },
-    };
-  }
-
   async function onSubmit(values: FormValues) {
     setLoading(true);
     setError(null);
@@ -164,6 +128,10 @@ function BirthFormFields() {
     }
   }
 
+  const yearOptions = Array.from(
+    { length: CURRENT_YEAR - 1920 + 1 },
+    (_, i) => CURRENT_YEAR - i,
+  );
   const monthOptions = Array.from({ length: 12 }, (_, i) => i + 1);
   const dayOptions = Array.from({ length: maxDay }, (_, i) => i + 1);
   const hourOptions = Array.from({ length: 24 }, (_, i) => i);
@@ -186,11 +154,17 @@ function BirthFormFields() {
       <div>
         <label className="mb-2 block text-sm text-ink-muted">생년월일</label>
         <div className="grid grid-cols-3 gap-3">
-          <input
-            placeholder="년"
+          <select
+            {...register("birthYear", { valueAsNumber: true })}
             className="input-field"
-            {...bindClampedNumber("birthYear", 1920, CURRENT_YEAR)}
-          />
+            aria-label="년"
+          >
+            {yearOptions.map((y) => (
+              <option key={y} value={y}>
+                {y}년
+              </option>
+            ))}
+          </select>
           <select
             {...register("birthMonth", { valueAsNumber: true })}
             className="input-field"
